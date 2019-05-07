@@ -122,7 +122,6 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(dired-listing-switches "-aGgn")
  '(package-selected-packages
    (quote
     (virtualenvwrapper markdown-mode yaml-mode cmake-mode slime web-mode auto-complete yasnippet-snippets yasnippet))))
