@@ -24,7 +24,7 @@
 ;; install packages automatically on startup
 (require 'cl-lib)
 (defvar my-packages
-  '(yasnippet yasnippet-snippets auto-complete web-mode))
+  '(yasnippet yasnippet-snippets auto-complete web-mode exec-path-from-shell virtualenvwrapper))
 (defun my-packages-installed-p ()
   (cl-loop for p in my-packages
 	   when (not (package-installed-p p)) do (cl-return nil)
@@ -138,3 +138,8 @@
 (venv-initialize-eshell)
 
 (setq venv-location "~/env")
+
+
+;; https://github.com/purcell/exec-path-from-shell
+(when (memq window-system '(mac ns x))
+  (exec-path-from-shell-initialize))
