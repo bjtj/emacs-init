@@ -8,10 +8,13 @@ if [ "$SKIP_DEPEND" == "1" ]
 then
     echo "[skip] depend"
 else
-    sudo apt install -y libxpm-dev libjpeg-dev libpng-dev libgif-dev libtiff-dev libgnutls-dev libncurses-dev
+    sudo apt install -y curl
+    sudo apt install -y libxpm-dev libjpeg-dev libpng-dev libgif-dev libtiff-dev libncurses-dev
+    # gnutls
+    sudo apt install -y libgnutls-dev
     RET=$?
     if [ $RET != 0 ]
-    then sudo apt install -y libxpm-dev libjpeg-dev libpng-dev libgif-dev libtiff-dev libgnutls28-dev libncurses-dev
+    then sudo apt install -y libgnutls28-dev
 	 if [ $? != 0 ]
 	 then echo "Failed!" ; exit 1
 	 fi
