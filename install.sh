@@ -8,6 +8,7 @@ if [ "$SKIP_DEPEND" == "1" ]
 then
     echo "[skip] depend"
 else
+    sudo apt update
     sudo apt install -y curl
     sudo apt install -y libxpm-dev libjpeg-dev libpng-dev libgif-dev libtiff-dev libncurses-dev
     # gnutls
