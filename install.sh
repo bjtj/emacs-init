@@ -34,6 +34,9 @@ else
     cd emacs-$VERSION
     ./configure --with-x-toolkit=no
     make -j
+    if [ $? != 0 ]
+    then echo "[error] build failed"; exit 1
+    fi
     sudo make install
     rm -rf /tmp/emacs
     popd
