@@ -3,6 +3,7 @@
 VERSION="26.3"
 SKIP_DEPEND=""
 SKIP_INSTALL=""
+BASE_URL=http://ftpmirror.gnu.org/emacs
 
 if [ "$SKIP_DEPEND" == "1" ]
 then
@@ -29,7 +30,7 @@ else
     pushd .
     mkdir -p /tmp/emacs
     cd /tmp/emacs
-    curl -OL http://ftp.jaist.ac.jp/pub/GNU/emacs/emacs-$VERSION.tar.gz
+    curl -OL $BASE_URL/emacs-$VERSION.tar.gz
     tar xvf emacs-$VERSION.tar.gz
     cd emacs-$VERSION
     ./configure --with-x-toolkit=no
