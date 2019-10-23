@@ -5,27 +5,40 @@ SKIP_DEPEND=""
 SKIP_INSTALL=""
 BASE_URL=http://ftpmirror.gnu.org/emacs
 
+if [ `id -u` == '0' ]
+then
+    SUDO=""
+    echo "[NOTE] You are root"
+else
+    SUDO="sudo"
+    echo "[NOTE] You are not root"
+fi
+
+
+# resolve dependencies
 if [ "$SKIP_DEPEND" == "1" ]
 then
-    echo "[skip] depend"
+    echo "[SKIP] Resolving dependencies"
 else
-    sudo apt update
-    sudo apt install -y curl
-    sudo apt install -y libxpm-dev libjpeg-dev libpng-dev libgif-dev libtiff-dev libncurses-dev
+    $SUDO apt update
+    $SUDO apt install -y curl
+    $SUDO apt install -y libxpm-dev libjpeg-dev libpng-dev libgif-dev libtiff-dev libncurses-dev
     # gnutls
-    sudo apt install -y libgnutls-dev
+    $SUDO apt install -y libgnutls-dev
     RET=$?
     if [ $RET != 0 ]
-    then sudo apt install -y libgnutls28-dev
+    then $SUDO apt install -y libgnutls28-dev
 	 if [ $? != 0 ]
 	 then echo "Failed!" ; exit 1
 	 fi
     fi
 fi
 
+
+# install
 if [ "$SKIP_INSTALL" == "1" ]
 then
-    echo "[skip] install"
+    echo "[SKIP] Building & Installation"
 else
     pushd .
     mkdir -p /tmp/emacs
@@ -34,21 +47,26 @@ else
     tar xvf emacs-$VERSION.tar.gz
     cd emacs-$VERSION
     ./configure --with-x-toolkit=no
-    make -j
+    make
     if [ $? != 0 ]
-    then echo "[error] build failed"; exit 1
+    then
+	echo "[ERROR] build failed"
+	echo "[ERROR] '--security-opt seccomp=unconfined' may be helpful"
+	exit 1
     fi
-    sudo make install
+    $SUDO make install
     rm -rf /tmp/emacs
     popd
 fi
 
-emacs --version
-
+# copy .emacs
 if [ ! -f "$HOME/.emacs" ]
 then
-    echo "[copy] .emacs to '$HOME'"
+    echo "[.emacs] copy .emacs to '$HOME'"
     cp .emacs "$HOME"
 else
-    echo "[skip] .emacs exists"
+    echo "[.emacs] .emacs exists already"
 fi
+
+# print emacs version
+emacs --version
