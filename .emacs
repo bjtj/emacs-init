@@ -143,3 +143,6 @@
 ;; https://github.com/purcell/exec-path-from-shell
 (when (memq window-system '(mac ns x))
   (exec-path-from-shell-initialize))
+
+;; https://unix.stackexchange.com/a/253077
+(xterm-mouse-mode 1)
