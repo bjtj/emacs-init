@@ -145,4 +145,4 @@
   (exec-path-from-shell-initialize))
 
 ;; https://unix.stackexchange.com/a/406519
-(xterm-mouse-mode 1)
+;; (xterm-mouse-mode 1)
