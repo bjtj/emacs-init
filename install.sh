@@ -4,6 +4,8 @@ VERSION="26.3"
 SKIP_DEPEND=""
 SKIP_INSTALL=""
 BASE_URL=http://ftpmirror.gnu.org/emacs
+WITH_X=1
+CONFIGURE_FLAGS=
 
 if [ `id -u` == '0' ]
 then
@@ -16,7 +18,7 @@ fi
 
 
 # resolve dependencies
-if [ "$SKIP_DEPEND" == "1" ]
+if [ x$SKIP_DEPEND == x"1" ]
 then
     echo "[SKIP] Resolving dependencies"
 else
@@ -34,9 +36,17 @@ else
     fi
 fi
 
+if [ x$WITH_X == x"1" ]
+then
+    CONFIGURE_FLAGS=
+else
+    CONFIGURE_FLAGS=--with-x-toolkit=no
+fi
+
+
 
 # install
-if [ "$SKIP_INSTALL" == "1" ]
+if [ x$SKIP_INSTALL == x"1" ]
 then
     echo "[SKIP] Building & Installation"
 else
@@ -46,7 +56,7 @@ else
     curl -OL $BASE_URL/emacs-$VERSION.tar.gz
     tar xvf emacs-$VERSION.tar.gz
     cd emacs-$VERSION
-    ./configure --with-x-toolkit=no
+    ./configure $CONFIGURE_FLAGS
     make
     if [ $? != 0 ]
     then
