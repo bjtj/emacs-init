@@ -24,7 +24,7 @@
 ;; install packages automatically on startup
 (require 'cl-lib)
 (defvar my-packages
-  '(yasnippet yasnippet-snippets auto-complete web-mode exec-path-from-shell virtualenvwrapper))
+  '(yasnippet yasnippet-snippets auto-complete web-mode exec-path-from-shell virtualenvwrapper flycheck))
 (defun my-packages-installed-p ()
   (cl-loop for p in my-packages
 	   when (not (package-installed-p p)) do (cl-return nil)
@@ -106,6 +106,9 @@
 (setq java-imports-find-block-function 'java-imports-find-place-sorted-block)
 (add-hook 'java-mode-hook 'on-java-loaded)
 (add-hook 'java-mode-hook 'java-imports-scan-file)
+
+;; flycheck
+(add-hook 'after-init-hook #'global-flycheck-mode)
 
 ;; timestamp
 ;; https://www.emacswiki.org/emacs/InsertingTodaysDate
