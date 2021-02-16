@@ -151,3 +151,11 @@
 
 ;; https://unix.stackexchange.com/a/406519
 ;; (xterm-mouse-mode 1)
+
+;; https://apple.stackexchange.com/a/399303
+(if (and (display-graphic-p) (string= system-type "darwin"))
+    (progn
+      (setq default-directory "~/")
+      (setq command-line-default-directory "~/")
+      )
+  )
