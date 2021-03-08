@@ -159,3 +159,18 @@
       (setq command-line-default-directory "~/")
       )
   )
+
+;; http://ergoemacs.org/emacs/emacs_customize_default_window_size.html
+(if (display-graphic-p)
+    (progn
+      (setq initial-frame-alist
+            '(
+              (width . 120)
+              (height . 60)))
+      (setq default-frame-alist
+            '(
+              (width . 120)
+              (height . 60))))
+  (progn
+    (setq initial-frame-alist '( (tool-bar-lines . 0)))
+    (setq default-frame-alist '( (tool-bar-lines . 0)))))
