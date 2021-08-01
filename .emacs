@@ -174,3 +174,11 @@
   (progn
     (setq initial-frame-alist '( (tool-bar-lines . 0)))
     (setq default-frame-alist '( (tool-bar-lines . 0)))))
+
+;; for clojure on windows
+(with-eval-after-load 'cider
+  (when (eq system-type 'windows-nt)
+    (define-advice cider--list-as-lein-artifact (:override (list &optional exclusions))
+      "Add missing double quotes around the version string for cmd.exe."
+      (shell-quote-argument
+       (format "[%s \"%S\"%s]" (car list) (cadr list) (cider--lein-artifact-exclusions exclusions))))))
