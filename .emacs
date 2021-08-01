@@ -176,6 +176,7 @@
     (setq default-frame-alist '( (tool-bar-lines . 0)))))
 
 ;; for clojure on windows
+;; * <https://github.com/clojure-emacs/cider/issues/2963#issuecomment-828125977>
 (with-eval-after-load 'cider
   (when (eq system-type 'windows-nt)
     (define-advice cider--list-as-lein-artifact (:override (list &optional exclusions))
