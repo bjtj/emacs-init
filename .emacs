@@ -183,3 +183,15 @@
       "Add missing double quotes around the version string for cmd.exe."
       (shell-quote-argument
        (format "[%s \"%S\"%s]" (car list) (cadr list) (cider--lein-artifact-exclusions exclusions))))))
+
+
+;; windows
+(when (eq system-type 'windows-nt)
+  (setenv "PATH"
+	  (concat
+	   "C:/dev/xplatform/bin;"
+	   (getenv "PATH")))
+  (setq exec-path
+	(append
+	 '("C:/dev/xplatform/bin")
+	 exec-path)))
