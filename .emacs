@@ -5,8 +5,9 @@
 (setq make-backup-files nil)
 (global-linum-mode 1)
 (setq-default indent-tab-mode t)
-(setq default-tab-width 4)
-(setq c-default-style "linux" c-basic-offset 4)
+(setq-default indent-tabs-mode nil)
+(setq default-tab-width 2)
+(setq c-default-style "linux" c-basic-offset 2)
 (setq column-number-mode t)
 (setq compilation-scroll-output t)
 
