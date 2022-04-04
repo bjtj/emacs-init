@@ -27,7 +27,7 @@
 (require 'cl-lib)
 (defvar my-packages
   '(yasnippet yasnippet-snippets auto-complete web-mode exec-path-from-shell virtualenvwrapper flycheck
-              rjsx-mode typescript-mode web-mode tide company yasnippet prettier-js))
+              rjsx-mode typescript-mode web-mode tide company yasnippet prettier-js json-mode))
 (defun my-packages-installed-p ()
   (cl-loop for p in my-packages
 	   when (not (package-installed-p p)) do (cl-return nil)
