@@ -1,3 +1,7 @@
+;;; .emacs --- init file
+;;; Commentary:
+;;; Code:
+
 ;; prefer encoding
 ;; https://www.emacswiki.org/emacs/UnicodeEncoding
 (prefer-coding-system 'utf-8)
@@ -5,7 +9,7 @@
 (setq make-backup-files nil)
 (global-linum-mode 1)
 (setq-default indent-tabs-mode nil)
-(setq default-tab-width 2)
+(setq-default tab-width 2)
 (setq c-default-style "linux" c-basic-offset 2)
 (setq column-number-mode t)
 (setq compilation-scroll-output t)
@@ -119,9 +123,6 @@
 (setq java-imports-find-block-function 'java-imports-find-place-sorted-block)
 (add-hook 'java-mode-hook 'on-java-loaded)
 (add-hook 'java-mode-hook 'java-imports-scan-file)
-
-;; flycheck
-(add-hook 'after-init-hook #'global-flycheck-mode)
 
 ;; timestamp
 ;; https://www.emacswiki.org/emacs/InsertingTodaysDate
@@ -251,3 +252,6 @@
 (add-hook 'web-mode-hook 'company-mode)
 (add-hook 'web-mode-hook 'prettier-js-mode)
 ;; (add-hook 'web-mode-hook #'turn-on-smartparens-mode t)
+
+(provide '.emacs)
+;;; .emacs ends here
