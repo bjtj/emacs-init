@@ -1,20 +1,44 @@
 #!/bin/bash
 
-VERSION="26.3"
-SKIP_DEPEND=""
-SKIP_INSTALL=""
-BASE_URL=http://ftpmirror.gnu.org/emacs
-WITH_X=1
+if [ -z "$VERSION" ];
+then VERSION="28.1"
+fi
+
+if [ -z "$SKIP_DEPEND" ]
+then SKIP_DEPEND=""
+fi
+
+if [ -z "$SKIP_INSTALL" ]
+then SKIP_INSTALL=""
+fi
+
+if [ -z "$BASE_URL" ]
+then BASE_URL=http://ftpmirror.gnu.org/emacs
+fi
+
+if [ -z "$WITH_X" ]
+then WITH_X=1
+fi
+
 CONFIGURE_FLAGS=
 
 if [ `id -u` == '0' ]
 then
     SUDO=""
-    echo "[NOTE] You are root"
+    echo "[] You are root"
 else
     SUDO="sudo"
     echo "[NOTE] You are not root"
 fi
+
+
+echo "=== CONFIGURATION ==="
+echo " - emacs version: '$VERSION'"
+echo " - skip depend: '$SKIP_DEPEND'"
+echo " - skip install: '$SKIP_INSTALL'"
+echo " - base url: '$BASE_URL'"
+echo " - with x: '$WITH_X'"
+echo " - sudo: '$SUDO'"
 
 
 # resolve dependencies
@@ -69,7 +93,7 @@ else
     popd
 fi
 
-# copy .emacs
+# copy .emacs if not exists
 if [ ! -f "$HOME/.emacs" ]
 then
     echo "[.emacs] copy .emacs to '$HOME'"
@@ -78,5 +102,5 @@ else
     echo "[.emacs] .emacs exists already"
 fi
 
-# print emacs version
+# print emacs version to check
 emacs --version

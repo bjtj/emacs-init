@@ -32,7 +32,7 @@
 (require 'cl-lib)
 (defvar my-packages
   '(yasnippet yasnippet-snippets auto-complete web-mode exec-path-from-shell virtualenvwrapper flycheck
-              rjsx-mode typescript-mode web-mode tide company yasnippet prettier-js json-mode))
+              rjsx-mode typescript-mode web-mode tide company yasnippet prettier-js json-mode solarized-theme))
 (defun my-packages-installed-p ()
   (cl-loop for p in my-packages
 	   when (not (package-installed-p p)) do (cl-return nil)
@@ -252,6 +252,9 @@
 (add-hook 'web-mode-hook 'company-mode)
 (add-hook 'web-mode-hook 'prettier-js-mode)
 ;; (add-hook 'web-mode-hook #'turn-on-smartparens-mode t)
+
+(if (display-graphic-p)
+    (load-theme 'solarized-light t))
 
 (provide '.emacs)
 ;;; .emacs ends here
