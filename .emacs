@@ -14,6 +14,7 @@
 (setq column-number-mode t)
 (setq compilation-scroll-output t)
 (setq js-indent-level 2)
+(setq typescript-indent-level 2)
 
 ;; (defalias 'yes-or-no-p 'y-or-n-p)
 
