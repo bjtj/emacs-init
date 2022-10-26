@@ -15,6 +15,7 @@
 (setq compilation-scroll-output t)
 (setq js-indent-level 2)
 (setq typescript-indent-level 2)
+(setq-local indent-line-function 'js-jsx-indent-line)
 
 ;; (defalias 'yes-or-no-p 'y-or-n-p)
 
