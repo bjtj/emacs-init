@@ -100,6 +100,15 @@
 
 (define-key global-map (kbd "C--") 'undo)
 
+;; ReformatBuffer
+;; https://www.emacswiki.org/emacs/ReformatBuffer
+(defun indent-buffer ()
+  "Indent Buffer."
+  (interactive)
+  (save-excursion
+    (indent-region (point-min) (point-max) nil)))
+(global-set-key [f12] 'indent-buffer)
+
 ;; backward window move
 ;; http://stackoverflow.com/questions/91071/emacs-switch-to-previous-window
 
