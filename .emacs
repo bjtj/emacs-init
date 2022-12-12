@@ -16,6 +16,7 @@
 (setq js-indent-level 2)
 (setq typescript-indent-level 2)
 (setq-local indent-line-function 'js-jsx-indent-line)
+(setq default-input-method "korean-hangul")
 
 ;; (defalias 'yes-or-no-p 'y-or-n-p)
 
