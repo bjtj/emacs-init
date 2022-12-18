@@ -56,7 +56,7 @@
 (global-flycheck-mode)
 (add-hook 'after-init-hook #'global-flycheck-mode)
 
-;; company-mode 
+;; company-mode
 (global-company-mode)
 
 
@@ -69,7 +69,7 @@
 (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
 
 (defun create-tags (dir-name)
-  "Create tags file."
+  "Create tags file (DIR-NAME is target path)."
   (interactive "DDirectory: ")
   (eshell-command
    (format "find %s -type f -name \"*.[ch]\" -o -name \"*.[ch]pp\" | etags -" dir-name)))
@@ -78,6 +78,7 @@
 
 (require 'ansi-color)
 (defun colorize-compilation-buffer ()
+  "."
   (toggle-read-only)
   (ansi-color-apply-on-region (point-min) (point-max))
   (toggle-read-only))
@@ -131,6 +132,7 @@
 
 ;; java-imports
 (defun on-java-loaded ()
+  "."
   (define-key java-mode-map (kbd "M-I") 'java-imports-add-import-dwim))
 (setq java-imports-find-block-function 'java-imports-find-place-sorted-block)
 (add-hook 'java-mode-hook 'on-java-loaded)
@@ -139,6 +141,7 @@
 ;; timestamp
 ;; https://www.emacswiki.org/emacs/InsertingTodaysDate
 (defun timestamp ()
+  "Get formatted timestamp."
   (interactive)
   (insert (format-time-string "%Y%m%d_%H%M%S")))
 
@@ -210,19 +213,25 @@
        (format "[%s \"%S\"%s]" (car list) (cadr list) (cider--lein-artifact-exclusions exclusions))))))
 
 
-;; windows
+;; -------
+;; WINDOWS
+;; =======
+
 (when (eq system-type 'windows-nt)
   (setenv "PATH"
-	  (concat
-	   "C:/dev/xplatform/bin;"
-	   (getenv "PATH")))
+	        (concat
+	         "C:/dev/xplatform/bin;"
+	         (getenv "PATH")))
   (setq exec-path
-	(append
-	 '("C:/dev/xplatform/bin")
-	 exec-path)))
+	      (append
+	       '("C:/dev/xplatform/bin")
+	       exec-path))
+  (setq find-program "C:/dev/xplatform/bin/find.exe")
+  (setq grep-program "C:/dev/xplatform/bin/grep.exe"))
 
 
 
+;; ------------------
 ;; REACT + TYPESCRIPT
 ;; ==================
 ;; https://dev.to/viglioni/how-i-set-up-my-emacs-for-typescript-3eeh
