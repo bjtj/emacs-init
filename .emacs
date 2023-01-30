@@ -194,11 +194,11 @@
       (setq initial-frame-alist
             '(
               (width . 120)
-              (height . 60)))
+              (height . 45)))
       (setq default-frame-alist
             '(
               (width . 120)
-              (height . 60))))
+              (height . 45))))
   (progn
     (setq initial-frame-alist '( (tool-bar-lines . 0)))
     (setq default-frame-alist '( (tool-bar-lines . 0)))))
