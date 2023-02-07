@@ -8,6 +8,21 @@
 <https://www.gnu.org/server/mirror.html>
 
 
+# Using install script #
+
+e.g.)
+
+```bash
+$ ./install.sh
+```
+
+e.g.) with version
+
+```bash
+$ VERSION=28.2 ./install.sh
+```
+
+
 # Install GNU Emacs for Linux using the Snap Store | Snapcraft #
 
 <https://snapcraft.io/emacs>
@@ -15,6 +30,8 @@
 ```bash
 sudo snap install emacs --classic
 ```
+
+NOTE) In my case, daemon is not working well.
 
 
 # Emacs Daemon as Service #

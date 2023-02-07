@@ -1,4 +1,4 @@
-#!/bin/bash
+##!/usr/bin/env bash
 
 if [ -z "$VERSION" ];
 then VERSION="28.1"
