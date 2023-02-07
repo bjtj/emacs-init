@@ -18,6 +18,9 @@
 (setq-local indent-line-function 'js-jsx-indent-line)
 (setq default-input-method "korean-hangul")
 
+(setq lock-file-name-transforms
+      `((".*" ,temporary-file-directory t)))
+
 ;; (defalias 'yes-or-no-p 'y-or-n-p)
 
 ;; http://pragmaticemacs.com/emacs/dired-human-readable-sizes-and-sort-by-size/
@@ -35,8 +38,9 @@
 (require 'cl-lib)
 (defvar my-packages
   '(yasnippet yasnippet-snippets auto-complete web-mode exec-path-from-shell virtualenvwrapper flycheck
-              rjsx-mode typescript-mode web-mode tide company yasnippet prettier-js json-mode solarized-theme))
+              rjsx-mode typescript-mode web-mode tide company yasnippet prettier-js json-mode))
 (defun my-packages-installed-p ()
+  "Check if all packages are installed."
   (cl-loop for p in my-packages
 	   when (not (package-installed-p p)) do (cl-return nil)
 	   finally (cl-return t)))
@@ -273,9 +277,6 @@
 (add-hook 'web-mode-hook 'company-mode)
 (add-hook 'web-mode-hook 'prettier-js-mode)
 ;; (add-hook 'web-mode-hook #'turn-on-smartparens-mode t)
-
-(if (display-graphic-p)
-    (load-theme 'solarized-light t))
 
 (provide '.emacs)
 ;;; .emacs ends here
