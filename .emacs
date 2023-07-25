@@ -38,7 +38,7 @@
 (require 'cl-lib)
 (defvar my-packages
   '(yasnippet yasnippet-snippets auto-complete web-mode exec-path-from-shell virtualenvwrapper flycheck
-              rjsx-mode typescript-mode web-mode tide company yasnippet prettier-js json-mode))
+              rjsx-mode typescript-mode web-mode tide company yasnippet prettier-js json-mode markdown-mode))
 (defun my-packages-installed-p ()
   "Check if all packages are installed."
   (cl-loop for p in my-packages
@@ -51,6 +51,10 @@
     (when (not (package-installed-p p))
       (package-install p))))
 
+;; markdown
+(require 'markdown-mode)
+(setq markdown-fontify-code-blocks-natively t)
+(setq markdown-code-face '((t nil)))
 
 ;; yasnippet
 (require 'yasnippet)
