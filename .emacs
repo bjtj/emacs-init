@@ -7,7 +7,7 @@
 (prefer-coding-system 'utf-8)
 
 (setq make-backup-files nil)
-(global-linum-mode 1)
+(global-display-line-numbers-mode 1)
 (setq-default indent-tabs-mode nil)
 (setq-default tab-width 2)
 (setq c-default-style "linux" c-basic-offset 2)
