@@ -37,7 +37,7 @@
 ;; install packages automatically on startup
 (require 'cl-lib)
 (defvar my-packages
-  '(yasnippet yasnippet-snippets auto-complete web-mode exec-path-from-shell virtualenvwrapper flycheck
+  '(yasnippet yasnippet-snippets auto-complete web-mode virtualenvwrapper flycheck
               rjsx-mode typescript-mode web-mode tide company yasnippet prettier-js json-mode markdown-mode))
 (defun my-packages-installed-p ()
   "Check if all packages are installed."
@@ -179,11 +179,6 @@
 (venv-initialize-eshell)
 
 (setq venv-location "~/env")
-
-
-;; https://github.com/purcell/exec-path-from-shell
-(when (memq window-system '(mac ns x))
-  (exec-path-from-shell-initialize))
 
 ;; https://unix.stackexchange.com/a/406519
 ;; (xterm-mouse-mode 1)
