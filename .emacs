@@ -21,6 +21,9 @@
 (setq lock-file-name-transforms
       `((".*" ,temporary-file-directory t)))
 
+(require 'unicode-fonts)
+(unicode-fonts-setup)
+
 ;; (defalias 'yes-or-no-p 'y-or-n-p)
 
 ;; http://pragmaticemacs.com/emacs/dired-human-readable-sizes-and-sort-by-size/
@@ -36,20 +39,6 @@
 
 ;; install packages automatically on startup
 (require 'cl-lib)
-(defvar my-packages
-  '(yasnippet yasnippet-snippets auto-complete web-mode virtualenvwrapper flycheck
-              rjsx-mode typescript-mode web-mode tide company yasnippet prettier-js json-mode markdown-mode))
-(defun my-packages-installed-p ()
-  "Check if all packages are installed."
-  (cl-loop for p in my-packages
-	   when (not (package-installed-p p)) do (cl-return nil)
-	   finally (cl-return t)))
-
-(unless (my-packages-installed-p)
-  (package-refresh-contents)
-  (dolist (p my-packages)
-    (when (not (package-installed-p p))
-      (package-install p))))
 
 ;; markdown
 (require 'markdown-mode)
