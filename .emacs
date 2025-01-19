@@ -73,13 +73,9 @@
 
 ;; find . -type f -name "*.[ch]" -o -name "*.[ch]pp" | etags -
 
+;; https://stackoverflow.com/a/71785402/5676460
 (require 'ansi-color)
-(defun colorize-compilation-buffer ()
-  "."
-  (toggle-read-only)
-  (ansi-color-apply-on-region (point-min) (point-max))
-  (toggle-read-only))
-(add-hook 'compilation-filter-hook 'colorize-compilation-buffer)
+(add-hook 'compilation-filter-hook 'ansi-color-compilation-filter)
 
 ;; http://www.emacswiki.org/emacs/PuTTY
 ;; PuTTY fix. Ugly. Bad. But it works. (Good)
