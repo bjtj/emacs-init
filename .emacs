@@ -88,11 +88,11 @@
 
 ;; find . -type f -name "*.[ch]" -o -name "*.[ch]pp" | etags -
 
-;; https://stackoverflow.com/a/71785402/5676460
+;; complation mode - ansi color
 (use-package ansi-color
+  :commands ansi-color-compilation-filter
   :ensure t
-  :config
-  (add-hook 'compilation-filter-hook 'ansi-color-compilation-filter))
+  :hook (compilation-filter . ansi-color-compilation-filter))
 
 ;; http://www.emacswiki.org/emacs/PuTTY
 ;; PuTTY fix. Ugly. Bad. But it works. (Good)
