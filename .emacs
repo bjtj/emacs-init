@@ -151,7 +151,6 @@
 (add-to-list 'auto-mode-alist '("\\.html\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.lsp\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.jsp\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.tsx\\'" . web-mode))
 
 ;; https://unix.stackexchange.com/a/406519
 ;; (xterm-mouse-mode 1)
@@ -242,11 +241,6 @@
 
 
 ;; web-mode extra config
-(add-hook 'web-mode-hook 'tide-setup-hook
-          (lambda () (pcase (file-name-extension buffer-file-name)
-                       ("tsx" ('tide-setup-hook))
-                       (_ (my-web-mode-hook)))))
-(flycheck-add-mode 'typescript-tslint 'web-mode)
 (add-hook 'web-mode-hook 'company-mode)
 (add-hook 'web-mode-hook 'prettier-js-mode)
 ;; (add-hook 'web-mode-hook #'turn-on-smartparens-mode t)
