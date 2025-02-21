@@ -21,9 +21,7 @@
 (setq lock-file-name-transforms
       `((".*" ,temporary-file-directory t)))
 
-(require 'unicode-fonts)
-(unicode-fonts-setup)
-
+;; yse/no -> y/n
 ;; (defalias 'yes-or-no-p 'y-or-n-p)
 
 ;; http://pragmaticemacs.com/emacs/dired-human-readable-sizes-and-sort-by-size/
@@ -37,30 +35,47 @@
 ;;(add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
 (package-initialize)
 
-;; install packages automatically on startup
-(require 'cl-lib)
+(when (version< emacs-version "29.0")
+  (unless (package-installed-p 'use-package)
+    (package-install 'use-package))
+  (require 'use-package))
 
 ;; markdown
-(require 'markdown-mode)
-(setq markdown-fontify-code-blocks-natively t)
-(setq markdown-code-face '((t nil)))
+(use-package markdown-mode
+  :ensure t
+  :config
+  (progn
+    (setq markdown-fontify-code-blocks-natively t)
+    (setq markdown-code-face '((t nil)))))
 
 ;; yasnippet
-(require 'yasnippet)
-(yas-global-mode 1)
+(use-package yasnippet
+  :ensure t
+  :config
+  (yas-global-mode 1))
 
 ;; flycheck
-(global-flycheck-mode)
-(add-hook 'after-init-hook #'global-flycheck-mode)
+(use-package flycheck
+  :ensure t
+  :config
+  (progn
+    (global-flycheck-mode)
+    (add-hook 'after-init-hook #'global-flycheck-mode)))
 
 ;; company-mode
-(global-company-mode)
+(use-package company
+  :ensure t
+  :config
+  (global-company-mode))
 
-
-(require 'auto-complete-config)
-(ac-config-default)
-(ac-set-trigger-key "TAB")
-(ac-set-trigger-key "<tab>")
+(use-package auto-complete
+  :ensure t
+  :config
+  (progn
+    (require 'auto-complete-config)
+    (ac-config-default)
+    (ac-set-trigger-key "TAB")
+    (ac-set-trigger-key "<tab>")))
 
 ;; http://stackoverflow.com/a/3312236/5676460
 (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
@@ -74,8 +89,10 @@
 ;; find . -type f -name "*.[ch]" -o -name "*.[ch]pp" | etags -
 
 ;; https://stackoverflow.com/a/71785402/5676460
-(require 'ansi-color)
-(add-hook 'compilation-filter-hook 'ansi-color-compilation-filter)
+(use-package ansi-color
+  :ensure t
+  :config
+  (add-hook 'compilation-filter-hook 'ansi-color-compilation-filter))
 
 ;; http://www.emacswiki.org/emacs/PuTTY
 ;; PuTTY fix. Ugly. Bad. But it works. (Good)
@@ -123,14 +140,6 @@
 ;; http://stackoverflow.com/a/19589885/5676460
 (add-to-list 'auto-mode-alist '("\\.log\\'" . auto-revert-mode))
 
-;; java-imports
-(defun on-java-loaded ()
-  "."
-  (define-key java-mode-map (kbd "M-I") 'java-imports-add-import-dwim))
-(setq java-imports-find-block-function 'java-imports-find-place-sorted-block)
-(add-hook 'java-mode-hook 'on-java-loaded)
-(add-hook 'java-mode-hook 'java-imports-scan-file)
-
 ;; timestamp
 ;; https://www.emacswiki.org/emacs/InsertingTodaysDate
 (defun timestamp ()
@@ -143,27 +152,6 @@
 (add-to-list 'auto-mode-alist '("\\.lsp\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.jsp\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.tsx\\'" . web-mode))
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(package-selected-packages
-   (quote
-    (virtualenvwrapper markdown-mode yaml-mode cmake-mode slime web-mode auto-complete yasnippet-snippets yasnippet))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
-
-
-(require 'virtualenvwrapper)
-(venv-initialize-interactive-shells)
-(venv-initialize-eshell)
-
-(setq venv-location "~/env")
 
 ;; https://unix.stackexchange.com/a/406519
 ;; (xterm-mouse-mode 1)
@@ -172,9 +160,7 @@
 (if (and (display-graphic-p) (string= system-type "darwin"))
     (progn
       (setq default-directory "~/")
-      (setq command-line-default-directory "~/")
-      )
-  )
+      (setq command-line-default-directory "~/")))
 
 ;; http://ergoemacs.org/emacs/emacs_customize_default_window_size.html
 (if (display-graphic-p)
@@ -217,14 +203,17 @@
   (setq find-program "C:/dev/xplatform/bin/find.exe")
   (setq grep-program "C:/dev/xplatform/bin/grep.exe"))
 
-
+;; unicode font
+(use-package unicode-fonts
+  :if window-system
+  :ensure t
+  :config
+  (unicode-fonts-setup))
 
 ;; ------------------
 ;; REACT + TYPESCRIPT
 ;; ==================
 ;; https://dev.to/viglioni/how-i-set-up-my-emacs-for-typescript-3eeh
-
-;; (require 'flycheck)
 
 ;; ...
 ;; tide def func:
