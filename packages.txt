@@ -1,0 +1,3 @@
+json-mode
+web-mode
+markdown-mode
