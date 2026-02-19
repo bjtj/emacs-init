@@ -17,6 +17,7 @@
 (setq typescript-indent-level 2)
 (setq-local indent-line-function 'js-jsx-indent-line)
 (setq default-input-method "korean-hangul")
+(setq ring-bell-function 'ignore)
 
 (setq lock-file-name-transforms
       `((".*" ,temporary-file-directory t)))
@@ -176,14 +177,26 @@
     (setq initial-frame-alist '( (tool-bar-lines . 0)))
     (setq default-frame-alist '( (tool-bar-lines . 0)))))
 
-;; for clojure on windows
-;; * <https://github.com/clojure-emacs/cider/issues/2963#issuecomment-828125977>
-(with-eval-after-load 'cider
-  (when (eq system-type 'windows-nt)
-    (define-advice cider--list-as-lein-artifact (:override (list &optional exclusions))
-      "Add missing double quotes around the version string for cmd.exe."
-      (shell-quote-argument
-       (format "[%s \"%S\"%s]" (car list) (cadr list) (cider--lein-artifact-exclusions exclusions))))))
+;; clojure
+(use-package cider
+  :ensure t)
+(use-package paredit
+  :ensure t)
+
+(add-hook 'cider-repl-mode-hook #'paredit-mode)
+(add-hook 'cider-mode-hook #'paredit-mode)
+(add-hook 'clojure-mode-hook #'paredit-mode)
+
+(defun cider-connect-dot-nrepl-port ()
+  "Connect to an nREPL server using the port from .nrepl-port."
+  (interactive)
+  (let ((port (when (file-exists-p ".nrepl-port")
+                (string-trim (with-temp-buffer
+                               (insert-file-contents ".nrepl-port")
+                               (buffer-string))))))
+    (if port
+        (cider-connect `(:host "localhost" :port ,port))
+      (message "No .nrepl-port file found!"))))
 
 
 ;; -------
