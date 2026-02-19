@@ -41,6 +41,11 @@
     (package-install 'use-package))
   (require 'use-package))
 
+;; ace window
+(use-package ace-window
+  :ensure t
+  :bind ("M-o" . ace-window))
+
 ;; markdown
 (use-package markdown-mode
   :ensure t
@@ -69,6 +74,7 @@
   :config
   (global-company-mode))
 
+;; auto-complete
 (use-package auto-complete
   :ensure t
   :config
@@ -77,6 +83,15 @@
     (ac-config-default)
     (ac-set-trigger-key "TAB")
     (ac-set-trigger-key "<tab>")))
+
+;; projectile
+(use-package projectile
+  :ensure t
+  :init
+  (projectile-mode +1)
+  :bind (:map projectile-mode-map
+              ("s-p" . projectile-command-map)
+              ("C-c p" . projectile-command-map)))
 
 ;; http://stackoverflow.com/a/3312236/5676460
 (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
