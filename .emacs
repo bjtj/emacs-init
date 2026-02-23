@@ -50,6 +50,10 @@
 (use-package gitignore-templates
   :ensure t)
 
+;; git-modes
+(use-package git-modes
+  :ensure t)
+
 ;; markdown
 (use-package markdown-mode
   :ensure t
