@@ -46,6 +46,10 @@
   :ensure t
   :bind ("M-o" . ace-window))
 
+;; gitignore
+(use-package gitignore-templates
+  :ensure t)
+
 ;; markdown
 (use-package markdown-mode
   :ensure t
