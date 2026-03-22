@@ -104,6 +104,8 @@
               ("s-p" . projectile-command-map)
               ("C-c p" . projectile-command-map)))
 
+(setq projectile-per-project-compilation-buffer t)
+
 ;; http://stackoverflow.com/a/3312236/5676460
 (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
 
