@@ -226,6 +226,17 @@
         (cider-connect `(:host "localhost" :port ,port))
       (message "No .nrepl-port file found!"))))
 
+(defun cider-connect-shadow-port-file ()
+  "Connect to an nREPL server(CLJS) using the port in .shadow-cljs/nrepl.port."
+  (interactive)
+  (let* ((nrepl-port-path ".shadow-cljs/nrepl.port")
+         (port (when (file-exists-p nrepl-port-path)
+                 (string-trim (with-temp-buffer
+                                (insert-file-contents nrepl-port-path)
+                                (buffer-string))))))
+    (if port
+        (cider-connect-cljs `(:host "localhost" :port ,port :cljs-repl-type shadow))
+      (message "No .nrepl-port file found!"))))
 
 ;; -------
 ;; WINDOWS
