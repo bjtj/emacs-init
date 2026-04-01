@@ -284,7 +284,11 @@
   :after lsp-mode
   :commands lsp-ui-mode)
 
+(use-package prettier
+  :ensure t)
+
 (use-package prettier-js
+  :ensure t
   :hook ((typescript-ts-mode . prettier-js-mode)))
 
 (use-package rjsx-mode
