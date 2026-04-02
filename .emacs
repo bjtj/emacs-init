@@ -47,6 +47,8 @@
   :ensure t
   :init
   (when (memq window-system '(mac ns x))
+    (exec-path-from-shell-initialize))
+  (when (and (daemonp) (not (memq system-type '(windows-nt ms-dos))))
     (exec-path-from-shell-initialize)))
 
 ;; ace window
