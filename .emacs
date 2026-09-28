@@ -1,3 +1,5 @@
+;;; -*- lexical-binding: t -*-
+
 ;;; .emacs --- init file
 ;;; Commentary:
 ;;; Code:
