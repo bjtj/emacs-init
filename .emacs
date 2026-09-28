@@ -19,6 +19,19 @@
 (setq default-input-method "korean-hangul")
 (setq ring-bell-function 'ignore)
 
+;; C-u -1 C-x o
+(define-key global-map (kbd "ESC <up>") (lambda () (interactive) (other-window -1)))
+(define-key global-map (kbd "ESC <down>") 'other-window)
+(define-key global-map (kbd "<M-up>") (lambda () (interactive) (other-window -1)))
+(define-key global-map (kbd "<M-down>") 'other-window)
+
+;; http://stackoverflow.com/a/17022997/5676460
+(setq scroll-error-top-bottom t)
+
+;; https://www.emacswiki.org/emacs/Scrolling
+(global-set-key "\M-n"  (lambda () (interactive) (scroll-up   6)) )
+(global-set-key "\M-p"  (lambda () (interactive) (scroll-down 6)) )
+
 (setq lock-file-name-transforms
       `((".*" ,temporary-file-directory t)))
 
@@ -162,19 +175,6 @@
 
 ;; backward window move
 ;; http://stackoverflow.com/questions/91071/emacs-switch-to-previous-window
-
-;; C-u -1 C-x o
-(define-key global-map (kbd "ESC <up>") (lambda () (interactive) (other-window -1)))
-(define-key global-map (kbd "ESC <down>") 'other-window)
-(define-key global-map (kbd "<M-up>") (lambda () (interactive) (other-window -1)))
-(define-key global-map (kbd "<M-down>") 'other-window)
-
-;; http://stackoverflow.com/a/17022997/5676460
-(setq scroll-error-top-bottom t)
-
-;; https://www.emacswiki.org/emacs/Scrolling
-(global-set-key "\M-n"  (lambda () (interactive) (scroll-up   6)) )
-(global-set-key "\M-p"  (lambda () (interactive) (scroll-down 6)) )
 
 ;; http://stackoverflow.com/a/19589885/5676460
 (add-to-list 'auto-mode-alist '("\\.log\\'" . auto-revert-mode))
